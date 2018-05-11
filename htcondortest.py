@@ -42,4 +42,6 @@ counts = {
 for slot in slots:
         print slot['Name'] + ' : ' + slot['CLIENTGROUP'] + ' ' + slot['Activity']
 	counts[slot['CLIENTGROUP']] += 1
+
+print str(runningJobCount) + ' running jobs'
 print counts
