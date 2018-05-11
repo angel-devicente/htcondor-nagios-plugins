@@ -6,10 +6,10 @@ jobs = schedd.query()
 runningJobCount=0
 
 # in this loop:
-# jobs queued/queued time
+# jobs queued/queued time (is this idle?)
 # jobs in progress/in progress time
+# jobs held
 for job in jobs:
-# how to detect a queued or in progres job?
 # http://pages.cs.wisc.edu/~adesmet/status.html
 #Job Status
 #JobStatus in job ClassAds
@@ -23,7 +23,9 @@ for job in jobs:
 #6	Submission_err	E
     if job['JobStatus'] != 4:
         print job['JobBatchName'] + ' : ' + job['AcctGroup'] + ' ' + str(job['JobStatus'])
-
+    if job['JobStatus'] == 2:
+	runningJobCount += 1
+	
 collector = htcondor.Collector()
 slots = collector.query(htcondor.AdTypes.Startd, "true")
 
