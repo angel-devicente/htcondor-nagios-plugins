@@ -8,9 +8,21 @@ runningJobCount=0
 # in this loop:
 # jobs queued/queued time
 # jobs in progress/in progress time
-#for job in jobs:
+for job in jobs:
 # how to detect a queued or in progres job?
-#    print job
+# http://pages.cs.wisc.edu/~adesmet/status.html
+#Job Status
+#JobStatus in job ClassAds
+#
+#0	Unexpanded	U
+#1	Idle	I
+#2	Running	R
+#3	Removed	X
+#4	Completed	C
+#5	Held	H
+#6	Submission_err	E
+    if job['JobStatus'] != 4:
+        print job['JobBatchName'] + ' : ' + job['AcctGroup'] + ' ' + str(job['JobStatus'])
 
 collector = htcondor.Collector()
 slots = collector.query(htcondor.AdTypes.Startd, "true")
