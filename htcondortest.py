@@ -1,6 +1,26 @@
 import htcondor
 
-schedd = htcondor.Schedd()
+collector = htcondor.Collector()
+slots = collector.query(htcondor.AdTypes.Startd, "true")
+
+counts = {
+	'njs': 0,
+	'bigmemlong': 0,
+	'bigmem': 0,
+	'kb_upload': 0
+}
+
+# in this loop:
+# clients
+# clientgroups total/idle/busy
+for slot in slots:
+        print slot['Name'] + ' : ' + slot['CLIENTGROUP'] + ' ' + slot['Activity']
+	counts[slot['CLIENTGROUP']] += 1
+
+# super hacky
+schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
+
+schedd = htcondor.Schedd(schedddaemon)
 jobs = schedd.query()
 
 runningJobCount=0
@@ -25,23 +45,6 @@ for job in jobs:
         print job['JobBatchName'] + ' : ' + job['AcctGroup'] + ' ' + str(job['JobStatus'])
     if job['JobStatus'] == 2:
 	runningJobCount += 1
-	
-collector = htcondor.Collector()
-slots = collector.query(htcondor.AdTypes.Startd, "true")
-
-counts = {
-	'njs': 0,
-	'bigmemlong': 0,
-	'bigmem': 0,
-	'kb_upload': 0
-}
-
-# in this loop:
-# clients
-# clientgroups total/idle/busy
-for slot in slots:
-        print slot['Name'] + ' : ' + slot['CLIENTGROUP'] + ' ' + slot['Activity']
-	counts[slot['CLIENTGROUP']] += 1
 
 print str(runningJobCount) + ' running jobs'
 print counts
