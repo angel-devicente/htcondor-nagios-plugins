@@ -34,13 +34,13 @@ for slot in slots:
 	slotState=3
 	slotStateText='UNKNOWN'
 	# these are just guesses
-	if slot['Status'] in [1,2,6]:
+	if slot['Activity'] in ['Busy','Idle','Benchmarking']:
 		slotState=0
 		slotStateText='OK'
-	if slot['Status'] in [0,3,4,5]:
+	if slot['Activity'] in ['None','Retiring','Vacating','Suspended']:
 		slotState=1
 		slotStateText='WARNING'
-	if slot['Status'] in [7]:
+	if slot['Activity'] in ['Killing']:
 		slotState=2
 		slotStateText='CRITICAL'
 		
