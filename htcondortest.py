@@ -1,6 +1,13 @@
 import htcondor
 
+#collector = htcondor.Collector('ci.kbase.us:9618')
 collector = htcondor.Collector()
+
+collectors = collector.query(htcondor.AdTypes.Collector, "true", ["Name"])
+numCollectors = len(collectors)
+negotiators = collector.query(htcondor.AdTypes.Negotiator, "true", ["Name"])
+numNegotiators = len(negotiators)
+
 slots = collector.query(htcondor.AdTypes.Startd, "true")
 
 counts = {
@@ -45,5 +52,7 @@ for job in jobs:
     if job['JobStatus'] == 2:
 	runningJobCount += 1
 
+print str(numCollectors) + ' collectors running'
+print str(numNegotiators) + ' negotiators running'
 print str(runningJobCount) + ' running jobs'
 print counts
