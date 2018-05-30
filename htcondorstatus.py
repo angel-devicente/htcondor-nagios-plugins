@@ -30,7 +30,7 @@ slotCounts = {
 # clients
 # clientgroups total/idle/busy
 for slot in slots:
-	print slot
+#	print slot
 	slotState=3
 	slotStateText='UNKNOWN'
 	# these are just guesses
