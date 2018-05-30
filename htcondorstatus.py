@@ -1,5 +1,8 @@
 import htcondor
 
+# magic numbers:
+# https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=MagicNumbers
+
 #collector = htcondor.Collector('ci.kbase.us:9618')
 collector = htcondor.Collector()
 
@@ -27,7 +30,20 @@ slotCounts = {
 # clients
 # clientgroups total/idle/busy
 for slot in slots:
-        print slot['Name'] + ' : ' + slot['CLIENTGROUP'] + ' ' + slot['Activity']
+	slotState=3
+	slotStateText='UNKNOWN'
+	# these are just guesses
+	if slot['Activity'] in (1,2,6):
+		slotState=0
+		slotStateText='OK'
+	if slot['Activity'] in (0,3,4,5):
+		slotState=1
+		slotStateText='WARNING'
+	if slot['Activity'] in (7):
+		slotState=2
+		slotStateText='CRITICAL'
+		
+	print str(slotState) + ' Condor_slot_' + slot['Name'] + ' state=' + str(slot['Activity']) + ' ' + slotStateText + ' - slot ' + slot['Name'] ' in clientgroup ' + slot['CLIENTGROUP'] + ' is in state ' + slot['Activity']
 	slotCounts[slot['CLIENTGROUP']] += 1
 
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
@@ -42,17 +58,6 @@ runningJobCount=0
 # jobs in progress/in progress time
 # jobs held
 for job in jobs:
-# http://pages.cs.wisc.edu/~adesmet/status.html
-#Job Status
-#JobStatus in job ClassAds
-#
-#0	Unexpanded	U
-#1	Idle	I
-#2	Running	R
-#3	Removed	X
-#4	Completed	C
-#5	Held	H
-#6	Submission_err	E
     if job['JobStatus'] != 4:
         print job['JobBatchName'] + ' : ' + job['AcctGroup'] + ' ' + str(job['JobStatus'])
     if job['JobStatus'] == 2:
