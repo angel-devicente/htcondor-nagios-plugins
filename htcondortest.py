@@ -52,7 +52,18 @@ for job in jobs:
     if job['JobStatus'] == 2:
 	runningJobCount += 1
 
-print str(numCollectors) + ' collectors running'
+collectorState=3
+collectorStateText='UNKNOWN'
+negotiatorState=3
+negotiatorStateText='UNKNOWN'
+
+if (numCollectors < 1):
+	collectorState=2
+	collectorStateText='CRITICAL'
+if (numCollectors > 0):
+	collectorState=0
+	collectorStateText='OK'
+print str(collectorState) + ' Condor_num_collectors collectors=' + str(numCollectors) + ' ' + collectorStateText + ': ' + str(numCollectors) + ' collectors running'
 print str(numNegotiators) + ' negotiators running'
 print str(runningJobCount) + ' running jobs'
 print counts
