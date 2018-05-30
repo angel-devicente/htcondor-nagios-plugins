@@ -63,7 +63,7 @@ if (numCollectors < 1):
 if (numCollectors > 0):
 	collectorState=0
 	collectorStateText='OK'
-print str(collectorState) + ' Condor_num_collectors collectors=' + str(numCollectors) + ' ' + collectorStateText + ': ' + str(numCollectors) + ' collectors running'
-print str(numNegotiators) + ' negotiators running'
+print str(collectorState) + ' Condor_num_collectors collectors=' + str(numCollectors) + ' ' + collectorStateText + ' - ' + str(numCollectors) + ' collectors running'
+print str(negotiatorState) + ' Condor_num_negotiators negotiators=' + str(numNegotiators) + ' ' + negotiatorStateText + ' - ' + str(numNegotiators) + ' negotiators running'
 print str(runningJobCount) + ' running jobs'
 print counts
