@@ -10,7 +10,13 @@ numNegotiators = len(negotiators)
 
 slots = collector.query(htcondor.AdTypes.Startd, "true")
 
-counts = {
+jobCounts = {
+	'njs': 0,
+	'bigmemlong': 0,
+	'bigmem': 0,
+	'kb_upload': 0
+}
+slotCounts = {
 	'njs': 0,
 	'bigmemlong': 0,
 	'bigmem': 0,
@@ -22,7 +28,7 @@ counts = {
 # clientgroups total/idle/busy
 for slot in slots:
         print slot['Name'] + ' : ' + slot['CLIENTGROUP'] + ' ' + slot['Activity']
-	counts[slot['CLIENTGROUP']] += 1
+	slotCounts[slot['CLIENTGROUP']] += 1
 
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
