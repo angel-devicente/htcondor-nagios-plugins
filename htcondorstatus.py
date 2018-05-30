@@ -11,6 +11,27 @@ numCollectors = len(collectors)
 negotiators = collector.query(htcondor.AdTypes.Negotiator, "true", ["Name"])
 numNegotiators = len(negotiators)
 
+collectorState=3
+collectorStateText='UNKNOWN'
+negotiatorState=3
+negotiatorStateText='UNKNOWN'
+
+if (numCollectors < 1):
+	collectorState=2
+	collectorStateText='CRITICAL'
+if (numCollectors > 0):
+	collectorState=0
+	collectorStateText='OK'
+print str(collectorState) + ' Condor_num_collectors collectors=' + str(numCollectors) + ' ' + collectorStateText + ' - ' + str(numCollectors) + ' collectors running'
+
+if (numNegotiators < 1):
+	negotiatorState=2
+	negotiatorStateText='CRITICAL'
+if (numNegotiators > 0):
+	negotiatorState=0
+	negotiatorStateText='OK'
+print str(negotiatorState) + ' Condor_num_negotiators negotiators=' + str(numNegotiators) + ' ' + negotiatorStateText + ' - ' + str(numNegotiators) + ' negotiators running'
+
 slots = collector.query(htcondor.AdTypes.Startd, "true")
 
 jobCounts = {
@@ -64,26 +85,5 @@ for job in jobs:
     if job['JobStatus'] == 2:
 	runningJobCount += 1
 
-collectorState=3
-collectorStateText='UNKNOWN'
-negotiatorState=3
-negotiatorStateText='UNKNOWN'
-
-if (numCollectors < 1):
-	collectorState=2
-	collectorStateText='CRITICAL'
-if (numCollectors > 0):
-	collectorState=0
-	collectorStateText='OK'
-
-if (numNegotiators < 1):
-	negotiatorState=2
-	negotiatorStateText='CRITICAL'
-if (numNegotiators > 0):
-	negotiatorState=0
-	negotiatorStateText='OK'
-
-print str(collectorState) + ' Condor_num_collectors collectors=' + str(numCollectors) + ' ' + collectorStateText + ' - ' + str(numCollectors) + ' collectors running'
-print str(negotiatorState) + ' Condor_num_negotiators negotiators=' + str(numNegotiators) + ' ' + negotiatorStateText + ' - ' + str(numNegotiators) + ' negotiators running'
 print str(runningJobCount) + ' running jobs'
 print slotCounts
