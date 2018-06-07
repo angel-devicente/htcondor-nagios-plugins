@@ -1,9 +1,13 @@
 #!/usr/bin/python
 
+import configobj
 import htcondor
 
 # magic numbers:
 # https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=MagicNumbers
+
+configfile=sys.argv[1]
+conf=configobj.ConfigObj(configfile)
 
 #collector = htcondor.Collector('ci.kbase.us:9618')
 collector = htcondor.Collector()
