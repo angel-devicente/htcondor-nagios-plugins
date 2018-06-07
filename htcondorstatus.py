@@ -67,7 +67,7 @@ for slot in slots:
 		slotState=2
 		slotStateText='CRITICAL'
 		
-	print str(slotState) + ' Condor_slot_' + slot['Name'] + ' state=' + str(slot['Activity']) + ' ' + slotStateText + ' - slot ' + slot['Name'] + ' in clientgroup ' + slot['CLIENTGROUP'] + ' is in state ' + slot['Activity']
+#	print str(slotState) + ' Condor_slot_' + slot['Name'] + ' state=' + str(slot['Activity']) + ' ' + slotStateText + ' - slot ' + slot['Name'] + ' in clientgroup ' + slot['CLIENTGROUP'] + ' is in state ' + slot['Activity']
 	slotCounts[slot['CLIENTGROUP']] += 1
 
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
@@ -91,9 +91,9 @@ for job in jobs:
 		acctgroup=job['AcctGroup']
 	except:
 		acctgroup='undefined'
-	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus'])
+#	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus'])
     if job['JobStatus'] == 2:
 	runningJobCount += 1
 
-print str(runningJobCount) + ' running jobs'
-print slotCounts
+#print str(runningJobCount) + ' running jobs'
+#print slotCounts
