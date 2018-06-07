@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import htcondor
 
 # magic numbers:
