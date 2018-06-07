@@ -10,6 +10,7 @@ import htcondor
 try:
 	configfile=sys.argv[1]
 	conf=configobj.ConfigObj(configfile)
+	print conf
 except:
 	pass
 
