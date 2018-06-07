@@ -89,7 +89,7 @@ for job in jobs:
 		acctgroup=job['AcctGroup']
 	except:
 		acctgroup='undefined'
-	print jobname + ' : ' + job['AcctGroup'] + ' ' + str(job['JobStatus'])
+	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus'])
     if job['JobStatus'] == 2:
 	runningJobCount += 1
 
