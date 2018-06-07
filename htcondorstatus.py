@@ -8,7 +8,10 @@ import htcondor
 # https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=MagicNumbers
 
 configfile=sys.argv[1]
-conf=configobj.ConfigObj(configfile)
+try:
+	conf=configobj.ConfigObj(configfile)
+except:
+	pass
 
 #collector = htcondor.Collector('ci.kbase.us:9618')
 collector = htcondor.Collector()
