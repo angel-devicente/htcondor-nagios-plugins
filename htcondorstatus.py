@@ -85,6 +85,10 @@ for job in jobs:
 		jobname=job['JobBatchName']
 	except:
 		jobname=job['GlobalJobId']
+	try:
+		acctgroup=job['AcctGroup']
+	except:
+		acctgroup='undefined'
 	print jobname + ' : ' + job['AcctGroup'] + ' ' + str(job['JobStatus'])
     if job['JobStatus'] == 2:
 	runningJobCount += 1
