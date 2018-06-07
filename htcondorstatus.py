@@ -81,7 +81,11 @@ runningJobCount=0
 # jobs held
 for job in jobs:
     if job['JobStatus'] != 4:
-        print job['JobBatchName'] + ' : ' + job['AcctGroup'] + ' ' + str(job['JobStatus'])
+	try:
+		jobname=job['JobBatchName']
+	except:
+		jobname=job['GlobalJobId']
+	print jobname + ' : ' + job['AcctGroup'] + ' ' + str(job['JobStatus'])
     if job['JobStatus'] == 2:
 	runningJobCount += 1
 
