@@ -83,8 +83,7 @@ for clientgroup in conf.sections():
 	if clientgroup in ['DEFAULT','global']:
 		continue
 	try:
-		print clientgroup
-		print slotCounts[clientgroup]
+		dummy=slotCounts[clientgroup]
 	except:
 		pass
 
