@@ -53,16 +53,10 @@ jobCounts = {
 	'bigmem': 0,
 	'kb_upload': 0
 }
-slotCounts = {
-	'njs': 0,
-	'bigmemlong': 0,
-	'bigmem': 0,
-	'kb_upload': 0
-}
 
 # in this loop:
-# clients
-# clientgroups total/idle/busy
+# clients (done)
+# clientgroups total/idle/busy (still to do)
 for slot in slots:
 #	print slot
 	slotState=3
@@ -80,7 +74,12 @@ for slot in slots:
 		
 	print str(slotState) + ' Condor_slot_' + slot['Name'] + ' state=' + str(slot['Activity']) + ' ' + slotStateText + ' - slot ' + slot['Name'] + ' in clientgroup ' + slot['CLIENTGROUP'] + ' is in state ' + slot['Activity']
 	# need to check for this key, and create if not exists
-	slotCounts[slot['CLIENTGROUP']] += 1
+	if slot['Activity'] not in slotCounts:
+		slotCounts[slot['Activity']] = {}
+	if slot['CLIENTGROUP'] not in slotCounts[slot['Activity']:
+		slotCounts[slot['Activity']][slot['CLIENTGROUP']] = 1
+	else:
+		slotCounts[slot['Activity']][slot['CLIENTGROUP']] += 1
 
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
@@ -90,9 +89,9 @@ jobs = schedd.query()
 runningJobCount=0
 
 # in this loop:
-# jobs queued/queued time (is this idle?)
-# jobs in progress/in progress time
-# jobs held
+# jobs queued/queued time (is this idle?) (still to do)
+# jobs in progress/in progress time (still to do)
+# jobs held (still to do)
 for job in jobs:
     if job['JobStatus'] != 4:
 	try:
