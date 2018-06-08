@@ -9,7 +9,8 @@ import htcondor
 
 try:
 	configfile=sys.argv[1]
-	conf=configparser.ConfigParser(configfile)
+	conf=configparser.ConfigParser()
+	conf.read(configfile)
 	print conf
 except:
 	pass
