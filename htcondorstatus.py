@@ -78,6 +78,7 @@ for slot in slots:
 		slotStateText='CRITICAL'
 		
 	print str(slotState) + ' Condor_slot_' + slot['Name'] + ' state=' + str(slot['Activity']) + ' ' + slotStateText + ' - slot ' + slot['Name'] + ' in clientgroup ' + slot['CLIENTGROUP'] + ' is in state ' + slot['Activity']
+	# need to check for this key, and create if not exists
 	slotCounts[slot['CLIENTGROUP']] += 1
 
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
