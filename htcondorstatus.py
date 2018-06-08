@@ -77,7 +77,7 @@ for slot in slots:
 	# need to check for this key, and create if not exists
 	if slot['Activity'] not in slotCounts:
 		slotCounts[slot['Activity']] = {}
-	if slot['CLIENTGROUP'] not in slotCounts[slot['Activity']:
+	if slot['CLIENTGROUP'] not in slotCounts[slot['Activity']]:
 		slotCounts[slot['Activity']][slot['CLIENTGROUP']] = 1
 	else:
 		slotCounts[slot['Activity']][slot['CLIENTGROUP']] += 1
