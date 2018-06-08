@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import sys
-import configobj
+import configparser
 import htcondor
 
 # magic numbers:
@@ -9,7 +9,7 @@ import htcondor
 
 try:
 	configfile=sys.argv[1]
-	conf=configobj.ConfigObj(configfile)
+	conf=configparser.ConfigParser(configfile)
 	print conf
 except:
 	pass
