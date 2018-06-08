@@ -85,7 +85,27 @@ for clientgroup in conf.sections():
 	if clientgroup in ['DEFAULT','global']:
 		continue
 	try:
-		dummy=slotCounts[clientgroup]
+		if slotCounts[clientgroup]['Total'] >= conf.get(clientgroup,'minTotal.warn'):
+			clientgroupState=0
+			clientgroupStateText='OK'
+		if slotCounts[clientgroup]['Total'] < conf.get(clientgroup,'minTotal.warn'):
+			clientgroupState=1
+			clientgroupStateText='WARNING'
+		if slotCounts[clientgroup]['Total'] < conf.get(clientgroup,'minTotal.crit'):
+			clientgroupState=2
+			clientgroupStateText='CRITICAL'
+		if slotCounts[clientgroup]['Idle'] >= conf.get(clientgroup,'minIdle.warn'):
+			clientgroupState=0
+			clientgroupStateText='OK'
+		if slotCounts[clientgroup]['Idle'] < conf.get(clientgroup,'minIdle.warn'):
+			clientgroupState=1
+			clientgroupStateText='WARNING'
+		if slotCounts[clientgroup]['Idle'] < conf.get(clientgroup,'minIdle.crit'):
+			clientgroupState=2
+			clientgroupStateText='CRITICAL'
+
+		print str(clientgroupState) + ' Condor_clientgroup_' + clientgroup + ' - ' + clientgroupStateText + ' - clientgroup ' + clientgroup + ' has ' + str(slotCounts[clientgroup]['Total'] + ' total workers and' + str(slotCounts[clientgroup]['Idle'] + ' idle workers'
+		
 	except:
 		print str(3) + ' Condor_clientgroup_' + clientgroup + ' - UNKNOWN - clientgroup ' + clientgroup + ' has no workers in any state'
 
