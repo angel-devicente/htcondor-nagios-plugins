@@ -85,7 +85,7 @@ for clientgroup in conf.sections():
 	try:
 		dummy=slotCounts[clientgroup]
 	except:
-		pass
+		print str(3) + ' Condor_clientgroup_' + clientgroup + ' - UNKNOWN - clientgroup ' + clientgroup + ' has no workers in any state'
 
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
