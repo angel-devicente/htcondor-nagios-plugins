@@ -88,22 +88,22 @@ for clientgroup in conf.sections():
 		clientgroupState=3
 		clientgroupStateText='UNKNOWN'
 
-		if slotCounts[clientgroup]['Total'] >= conf.get(clientgroup,'minTotal.warn'):
+		if slotCounts[clientgroup]['Total'] >= conf.getint(clientgroup,'minTotal.warn'):
 			clientgroupState=0
 			clientgroupStateText='OK'
-		if slotCounts[clientgroup]['Total'] < conf.get(clientgroup,'minTotal.warn'):
+		if slotCounts[clientgroup]['Total'] < conf.getint(clientgroup,'minTotal.warn'):
 			clientgroupState=1
 			clientgroupStateText='WARNING'
-		if slotCounts[clientgroup]['Total'] < conf.get(clientgroup,'minTotal.crit'):
+		if slotCounts[clientgroup]['Total'] < conf.getint(clientgroup,'minTotal.crit'):
 			clientgroupState=2
 			clientgroupStateText='CRITICAL'
-		if slotCounts[clientgroup]['Idle'] >= conf.get(clientgroup,'minIdle.warn'):
+		if slotCounts[clientgroup]['Idle'] >= conf.getint(clientgroup,'minIdle.warn'):
 			clientgroupState=0
 			clientgroupStateText='OK'
-		if slotCounts[clientgroup]['Idle'] < conf.get(clientgroup,'minIdle.warn'):
+		if slotCounts[clientgroup]['Idle'] < conf.getint(clientgroup,'minIdle.warn'):
 			clientgroupState=1
 			clientgroupStateText='WARNING'
-		if slotCounts[clientgroup]['Idle'] < conf.get(clientgroup,'minIdle.crit'):
+		if slotCounts[clientgroup]['Idle'] < conf.getint(clientgroup,'minIdle.crit'):
 			clientgroupState=2
 			clientgroupStateText='CRITICAL'
 
