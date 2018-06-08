@@ -11,7 +11,7 @@ try:
 	configfile=sys.argv[1]
 	conf=configparser.ConfigParser()
 	conf.read(configfile)
-	print conf
+	print conf.sections()
 except:
 	pass
 
