@@ -7,13 +7,10 @@ import htcondor
 # magic numbers:
 # https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=MagicNumbers
 
-try:
-	configfile=sys.argv[1]
-	conf=configparser.ConfigParser()
-	conf.read(configfile)
-#	print conf.sections()
-except:
-	pass
+configfile=sys.argv[1]
+conf=configparser.ConfigParser()
+conf.read(configfile)
+#print conf.sections()
 
 #collector = htcondor.Collector('ci.kbase.us:9618')
 collector = htcondor.Collector()
@@ -81,7 +78,6 @@ for slot in slots:
 		slotCounts[slot['Activity']][slot['CLIENTGROUP']] = 1
 	else:
 		slotCounts[slot['Activity']][slot['CLIENTGROUP']] += 1
-
 
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
