@@ -82,6 +82,7 @@ for slot in slots:
 	else:
 		slotCounts[slot['Activity']][slot['CLIENTGROUP']] += 1
 
+
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
 schedd = htcondor.Schedd(schedddaemon)
