@@ -85,6 +85,9 @@ for clientgroup in conf.sections():
 	if clientgroup in ['DEFAULT','global']:
 		continue
 	try:
+		clientgroupState=3
+		clientgroupStateText='UNKNOWN'
+
 		if slotCounts[clientgroup]['Total'] >= conf.get(clientgroup,'minTotal.warn'):
 			clientgroupState=0
 			clientgroupStateText='OK'
