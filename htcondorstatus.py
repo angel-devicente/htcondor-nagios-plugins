@@ -11,7 +11,7 @@ try:
 	configfile=sys.argv[1]
 	conf=configparser.ConfigParser()
 	conf.read(configfile)
-	print conf.sections()
+#	print conf.sections()
 except:
 	pass
 
@@ -46,6 +46,7 @@ print str(negotiatorState) + ' Condor_num_negotiators negotiators=' + str(numNeg
 
 slots = collector.query(htcondor.AdTypes.Startd, "true")
 
+# generate these on the fly in the slot or job loop
 jobCounts = {
 	'njs': 0,
 	'bigmemlong': 0,
