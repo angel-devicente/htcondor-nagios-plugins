@@ -54,7 +54,6 @@ slotCounts = {}
 
 # in this loop:
 # clients (done)
-# clientgroups total/idle/busy (still to do)
 for slot in slots:
 #	print slot
 	slotState=3
@@ -74,11 +73,14 @@ for slot in slots:
 	# need to check for this key, and create if not exists
 	if slot['CLIENTGROUP'] not in slotCounts:
 		slotCounts[slot['CLIENTGROUP']] = {}
+		slotCounts[slot['CLIENTGROUP']]['Total'] = 0
+	slotCounts[slot['CLIENTGROUP']]['Total'] += 1
 	if slot['Activity'] not in slotCounts[slot['CLIENTGROUP']]:
-		slotCounts[slot['CLIENTGROUP']][slot['Activity']] = 1
-	else:
-		slotCounts[slot['CLIENTGROUP']][slot['Activity']] += 1
+		slotCounts[slot['CLIENTGROUP']][slot['Activity']] = 0
+	slotCounts[slot['CLIENTGROUP']][slot['Activity']] += 1
 
+# clientgroups total/idle/busy (still to do)
+# this doesn't pick up clientgroups in condor but not in config file
 for clientgroup in conf.sections():
 	if clientgroup in ['DEFAULT','global']:
 		continue
