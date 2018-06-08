@@ -82,7 +82,10 @@ for slot in slots:
 for clientgroup in conf.sections():
 	if clientgroup in ['DEFAULT','global']:
 		continue
-	print slotCounts[clientgroup]
+	try:
+		print slotCounts[clientgroup]
+	except:
+		pass
 
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
