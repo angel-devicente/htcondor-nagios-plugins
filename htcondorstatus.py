@@ -128,12 +128,13 @@ idleJobCount=0
 for job in jobs:
     numIdleState=3
     numIdleStateText='UNKNOWN'
-    idleTimeState=3
-    idleTimeStateText='UNKNOWN'
     numRunningState=3
     numRunningStateText='UNKNOWN'
-    runningTimeState=3
-    runningTimeStateText='UNKNOWN'
+# the default state should probably be OK for runtime
+    idleTimeState=0
+    idleTimeStateText='OK'
+    runningTimeState=0
+    runningTimeStateText='OK'
 
     jobname='[undefined]'
     acctgroup='[undefined]'
@@ -150,15 +151,19 @@ for job in jobs:
     if job['JobStatus'] == 2:
 	if job['ServerTime'] - job['JobStartDate'] > conf.getint('global','runtime.warn'):
 		runningTimeState=1
+		runningTimeStateText='WARNING'
 	if job['ServerTime'] - job['JobStartDate'] > conf.getint('global','runtime.crit'):
 		runningTimeState=2
+		runningTimeStateText='CRITICAL'
 	runningJobCount += 1
 # 1 is idle; alert on long queue times
     if job['JobStatus'] == 1:
 	if job['ServerTime'] - job['QDate'] > conf.getint('global','idletime.warn'):
-		runningTimeState=1
+		idleTimeState=1
+		idleTimeStateText='WARNING'
 	if job['ServerTime'] - job['QDate'] > conf.getint('global','idletime.crit'):
-		runningTimeState=2
+		idleTimeState=2
+		idleTimeStateText='CRITICAL'
 	idleJobCount += 1
 #    print jobname
 #    print job['JobStartDate']
