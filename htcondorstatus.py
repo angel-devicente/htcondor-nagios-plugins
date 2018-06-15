@@ -185,8 +185,8 @@ for job in jobs:
 longRunningJobsText = ', '.join(longRunningJobList[-10:])
 longIdleJobsText = ', '.join(longIdleJobList[-10:])
 
-print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max %d minutes, longest 10 jobs %s" % (idleTimeState,10,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText,maxIdleTime,longIdleJobsText)
-print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max %d minutes, longest 10 jobs %s" % (runningTimeState,maxRunningTime,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText,maxRunningTime,longRunningJobsText)
+print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max %d minutes, longest 10 jobs: %s" % (idleTimeState,10,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText,maxIdleTime,longIdleJobsText)
+print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max %d minutes, longest 10 jobs: %s" % (runningTimeState,maxRunningTime,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText,maxRunningTime,longRunningJobsText)
 
 #    print jobname
 #    print job['JobStartDate']
