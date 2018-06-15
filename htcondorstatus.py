@@ -143,6 +143,7 @@ for job in jobs:
 
     jobname='[undefined]'
     acctgroup='[undefined]'
+    clientgroup='[undefined]'
     try:
 	jobname=job['JobBatchName']
     except:
@@ -151,6 +152,10 @@ for job in jobs:
 	acctgroup=job['AcctGroup']
     except:
 	acctgroup='undefined'
+    try:
+	clientgroup=job['CLIENTGROUP']
+    except:
+	clientgroup='undefined'
 
 # these loops could be made better by storing the data in a structure instead of
 # variables with "running" or "idle" in the name
@@ -160,6 +165,7 @@ for job in jobs:
     if job['JobStatus'] == 2:
 #	print job
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
+	print job['Requirements']
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
 		maxRunningTime=jobRunningTime
