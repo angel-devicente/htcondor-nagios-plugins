@@ -157,7 +157,6 @@ for job in jobs:
 	print str(job['ServerTime'] - job['JobStartDate'])
 	print str(conf.getint('global','runtime.warn'))
 	if (job['ServerTime'] - job['JobStartDate'])/60 > conf.getint('global','runtime.warn'):
-		print jobname + ' warning'
 		runningTimeState=1
 		runningTimeStateText='WARNING'
 	if (job['ServerTime'] - job['JobStartDate'])/60 > conf.getint('global','runtime.crit'):
