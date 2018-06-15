@@ -79,7 +79,6 @@ for slot in slots:
 		slotCounts[slot['CLIENTGROUP']][slot['Activity']] = 0
 	slotCounts[slot['CLIENTGROUP']][slot['Activity']] += 1
 
-# clientgroups total/idle/busy (still to do)
 # this doesn't pick up clientgroups in condor but not in config file
 for clientgroup in conf.sections():
 	if clientgroup in ['DEFAULT','global']:
@@ -137,6 +136,7 @@ for job in jobs:
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus'])
     if job['JobStatus'] == 2:
 	runningJobCount += 1
-
+    print job
+	
 #print str(runningJobCount) + ' running jobs'
 #print slotCounts
