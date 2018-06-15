@@ -125,17 +125,18 @@ idleJobCount=0
 # jobs queued/queued time (is this idle?) (still to do)
 # jobs in progress/in progress time (still to do)
 # jobs held (still to do)
-for job in jobs:
 
 # the default state should probably be OK for these
-    numIdleState=0
-    numIdleStateText='OK'
-    numRunningState=0
-    numRunningStateText='OK'
-    idleTimeState=0
-    idleTimeStateText='OK'
-    runningTimeState=0
-    runningTimeStateText='OK'
+numIdleState=0
+numIdleStateText='OK'
+numRunningState=0
+numRunningStateText='OK'
+idleTimeState=0
+idleTimeStateText='OK'
+runningTimeState=0
+runningTimeStateText='OK'
+
+for job in jobs:
 
     jobname='[undefined]'
     acctgroup='[undefined]'
