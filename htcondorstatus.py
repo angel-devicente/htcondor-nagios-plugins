@@ -136,7 +136,7 @@ for job in jobs:
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus'])
     if job['JobStatus'] == 2:
 	runningJobCount += 1
-    print job
+#    print job
 	
 #print str(runningJobCount) + ' running jobs'
 #print slotCounts
