@@ -156,27 +156,26 @@ for job in jobs:
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
 	print str(job['ServerTime'] - job['JobStartDate'])
 	print str(conf.getint('global','runtime.warn'))
-	if job['ServerTime'] - job['JobStartDate'] > conf.getint('global','runtime.warn'):
+	if (job['ServerTime'] - job['JobStartDate'])/60 > conf.getint('global','runtime.warn'):
 		print jobname + ' warning'
 		runningTimeState=1
 		runningTimeStateText='WARNING'
-	if job['ServerTime'] - job['JobStartDate'] > conf.getint('global','runtime.crit'):
+	if (job['ServerTime'] - job['JobStartDate'])/60 > conf.getint('global','runtime.crit'):
 		runningTimeState=2
 		runningTimeStateText='CRITICAL'
 	runningJobCount += 1
 # 1 is idle; alert on long queue times
     if job['JobStatus'] == 1:
-	if job['ServerTime'] - job['QDate'] > conf.getint('global','idletime.warn'):
+	if (job['ServerTime'] - job['QDate'])/60 > conf.getint('global','idletime.warn'):
 		idleTimeState=1
 		idleTimeStateText='WARNING'
-	if job['ServerTime'] - job['QDate'] > conf.getint('global','idletime.crit'):
+	if (job['ServerTime'] - job['QDate'])/60 > conf.getint('global','idletime.crit'):
 		idleTimeState=2
 		idleTimeStateText='CRITICAL'
 	idleJobCount += 1
 
 print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max N minutes, longest 10 jobs BLAH" % (idleTimeState,10,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText)
 print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max N minutes, longest 10 jobs BLAH" % (runningTimeState,10,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText)
-
 
 #    print jobname
 #    print job['JobStartDate']
