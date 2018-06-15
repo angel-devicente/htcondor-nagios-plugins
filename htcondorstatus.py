@@ -165,6 +165,11 @@ for job in jobs:
 		idleTimeState=2
 		idleTimeStateText='CRITICAL'
 	idleJobCount += 1
+
+	print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max N minutes, longest 10 jobs BLAH" % (idleTimeState,10,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText)
+	print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max N minutes, longest 10 jobs BLAH" % (runningTimeState,10,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText)
+
+
 #    print jobname
 #    print job['JobStartDate']
 #    print job['QDate']
