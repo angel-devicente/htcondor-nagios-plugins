@@ -149,10 +149,16 @@ for job in jobs:
 # 2 is running; alert on long run times
     if job['JobStatus'] == 2:
 	if job['ServerTime'] - job['JobStartDate'] > conf.getint('global','runtime.warn'):
+		runningTimeState=1
+	if job['ServerTime'] - job['JobStartDate'] > conf.getint('global','runtime.crit'):
 		runningTimeState=2
 	runningJobCount += 1
 # 1 is idle; alert on long queue times
     if job['JobStatus'] == 1:
+	if job['ServerTime'] - job['QDate'] > conf.getint('global','idletime.warn'):
+		runningTimeState=1
+	if job['ServerTime'] - job['QDate'] > conf.getint('global','idletime.crit'):
+		runningTimeState=2
 	idleJobCount += 1
 #    print jobname
 #    print job['JobStartDate']
