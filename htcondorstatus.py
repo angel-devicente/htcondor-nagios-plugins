@@ -178,7 +178,7 @@ for job in jobs:
 		idleTimeStateText='CRITICAL'
 	idleJobCount += 1
 
-longJobsText = join(longInprogressJobList[-10:])
+longJobsText = ', '.join(longInprogressJobList[-10:])
 #statustxt['queuedTime'] = statustxt['queuedTime'] + ', ' . join(longqueuedJobList[-10:])
 
 print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max N minutes, longest 10 jobs BLAH" % (idleTimeState,10,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText)
