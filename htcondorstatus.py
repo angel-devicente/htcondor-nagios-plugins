@@ -152,6 +152,9 @@ for job in jobs:
     except:
 	acctgroup='undefined'
 
+# these loops could be made better by storing the data in a structure instead of
+# variables with "running" or "idle" in the name
+# also could just save maxXtime and compare at the end
 
 # 2 is running; alert on long run times
     if job['JobStatus'] == 2:
@@ -185,7 +188,23 @@ for job in jobs:
 longRunningJobsText = ', '.join(longRunningJobList[-10:])
 longIdleJobsText = ', '.join(longIdleJobList[-10:])
 
-print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max %d minutes, longest 10 jobs (minutes): %s" % (idleTimeState,10,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText,maxIdleTime,longIdleJobsText)
+if runningJobCount > conf.getint('global','runcount.warn'):
+	runningCountState=1
+	runningCountState='WARNING'
+if runningJobCount > conf.getint('global','runcount.crit'):
+	runningCountState=2
+	runningCountState='CRITICAL'
+if idleJobCount > conf.getint('global','idlecount.warn'):
+	idleCountState=1
+	idleCountState='WARNING'
+if idleJobCount > conf.getint('global','idlecount.warn'):
+	idleCountState=1
+	idleCountState='WARNING'
+
+print "%d Condor_idleCount idleCount=%d;%d;%d;0 %s - idleCount %d jobs idle" % (idleCountState,idleJobCount,conf.getint('global','idlecount.warn'),conf.getint('global','idlecount.crit'),idleCountStateText,idleJobCount)
+print "%d Condor_runningCount runningCount=%d;%d;%d;0 %s - runningCount %d jobs idle" % (runningCountState,runningJobCount,conf.getint('global','runningcount.warn'),conf.getint('global','runningcount.crit'),runningCountStateText,runningJobCount)
+
+print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max %d minutes, longest 10 jobs (minutes): %s" % (idleTimeState,maxIdleTime,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText,maxIdleTime,longIdleJobsText)
 print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max %d minutes, longest 10 jobs (minutes): %s" % (runningTimeState,maxRunningTime,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText,maxRunningTime,longRunningJobsText)
 
 #    print jobname
