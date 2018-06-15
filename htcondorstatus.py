@@ -126,11 +126,12 @@ idleJobCount=0
 # jobs in progress/in progress time (still to do)
 # jobs held (still to do)
 for job in jobs:
-    numIdleState=3
-    numIdleStateText='UNKNOWN'
-    numRunningState=3
-    numRunningStateText='UNKNOWN'
-# the default state should probably be OK for runtime
+
+# the default state should probably be OK for these
+    numIdleState=0
+    numIdleStateText='OK'
+    numRunningState=0
+    numRunningStateText='OK'
     idleTimeState=0
     idleTimeStateText='OK'
     runningTimeState=0
@@ -146,9 +147,11 @@ for job in jobs:
 	acctgroup=job['AcctGroup']
     except:
 	acctgroup='undefined'
-#	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus'])
+
+
 # 2 is running; alert on long run times
     if job['JobStatus'] == 2:
+	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus'])
 	if job['ServerTime'] - job['JobStartDate'] > conf.getint('global','runtime.warn'):
 		runningTimeState=1
 		runningTimeStateText='WARNING'
