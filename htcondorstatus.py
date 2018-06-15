@@ -126,14 +126,14 @@ longRunningJobList=[]
 longIdleJobList=[]
 
 # the default state should probably be OK for these
-numIdleState=0
-numIdleStateText='OK'
-numRunningState=0
-numRunningStateText='OK'
 idleTimeState=0
 idleTimeStateText='OK'
 runningTimeState=0
 runningTimeStateText='OK'
+idleCountState=0
+idleCountStateText='OK'
+runningCountState=0
+runningCountStateText='OK'
 
 # in this loop:
 # jobs queued/queued time (is this idle?) (still to do)
