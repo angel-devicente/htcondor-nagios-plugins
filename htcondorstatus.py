@@ -124,6 +124,8 @@ runningJobCount=0
 # jobs in progress/in progress time (still to do)
 # jobs held (still to do)
 for job in jobs:
+    jobname='[undefined]'
+    acctgroup='[undefined]'
     if job['JobStatus'] != 4:
 	try:
 		jobname=job['JobBatchName']
