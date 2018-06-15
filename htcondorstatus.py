@@ -126,6 +126,15 @@ idleJobCount=0
 # jobs in progress/in progress time (still to do)
 # jobs held (still to do)
 for job in jobs:
+    numIdleState=3
+    numIdleStateText='UNKNOWN'
+    idleTimeState=3
+    idleTimeStateText='UNKNOWN'
+    numRunningState=3
+    numRunningStateText='UNKNOWN'
+    runningTimeState=3
+    runningTimeStateText='UNKNOWN'
+
     jobname='[undefined]'
     acctgroup='[undefined]'
     try:
@@ -139,6 +148,8 @@ for job in jobs:
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus'])
 # 2 is running; alert on long run times
     if job['JobStatus'] == 2:
+	if job['ServerTime'] - job['JobStartDate'] > conf.getint('global','runtime.warn'):
+		
 	runningJobCount += 1
 # 1 is idle; alert on long queue times
     if job['JobStatus'] == 1:
