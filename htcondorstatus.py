@@ -128,7 +128,6 @@ idleJobCount=0
 for job in jobs:
     jobname='[undefined]'
     acctgroup='[undefined]'
-#    if job['JobStatus'] != 4:
     try:
 	jobname=job['JobBatchName']
     except:
@@ -144,10 +143,10 @@ for job in jobs:
 # 1 is idle; alert on long queue times
     if job['JobStatus'] == 1:
 	idleJobCount += 1
-    print jobname
-    print job['JobStartDate']
-    print job['QDate']
-    print job['ServerTime']
+#    print jobname
+#    print job['JobStartDate']
+#    print job['QDate']
+#    print job['ServerTime']
 	
 #print str(runningJobCount) + ' running jobs'
 #print slotCounts
