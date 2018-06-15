@@ -177,8 +177,8 @@ for job in jobs:
 		idleTimeStateText='CRITICAL'
 	idleJobCount += 1
 
-statustxt['inprogressTime'] = statustxt['inprogressTime'] + ', ' . join(longInprogressJobList[-10:])
-statustxt['queuedTime'] = statustxt['queuedTime'] + ', ' . join(longqueuedJobList[-10:])
+#statustxt['inprogressTime'] = statustxt['inprogressTime'] + ', ' . join(longInprogressJobList[-10:])
+#statustxt['queuedTime'] = statustxt['queuedTime'] + ', ' . join(longqueuedJobList[-10:])
 
 print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max N minutes, longest 10 jobs BLAH" % (idleTimeState,10,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText)
 print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max %d minutes, longest 10 jobs BLAH" % (runningTimeState,maxRunningTime,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText,maxRunningTime)
