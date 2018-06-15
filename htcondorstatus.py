@@ -117,7 +117,9 @@ schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 schedd = htcondor.Schedd(schedddaemon)
 jobs = schedd.query()
 
+# need to make these clientgroup-specific?
 runningJobCount=0
+idleJobCount=0
 
 # in this loop:
 # jobs queued/queued time (is this idle?) (still to do)
@@ -136,8 +138,12 @@ for job in jobs:
     except:
 	acctgroup='undefined'
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus'])
+# 2 is running; alert on long run times
     if job['JobStatus'] == 2:
 	runningJobCount += 1
+# 1 is idle; alert on long queue times
+    if job['JobStatus'] == 1:
+	idleJobCount += 1
     print jobname
     print job['JobStartDate']
     print job['QDate']
