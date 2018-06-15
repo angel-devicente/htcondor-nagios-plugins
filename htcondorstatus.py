@@ -165,7 +165,7 @@ for job in jobs:
     if job['JobStatus'] == 2:
 #	print job
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
-	print job['Requirements']
+#	print job['Requirements']
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
 		maxRunningTime=jobRunningTime
