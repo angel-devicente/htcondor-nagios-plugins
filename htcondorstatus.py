@@ -151,8 +151,10 @@ for job in jobs:
 
 # 2 is running; alert on long run times
     if job['JobStatus'] == 2:
-	print job
-	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
+#	print job
+#	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
+	print str(job['ServerTime'] - job['JobStartDate'])
+	print str(conf.getint('global','runtime.warn')):
 	if job['ServerTime'] - job['JobStartDate'] > conf.getint('global','runtime.warn'):
 		runningTimeState=1
 		runningTimeStateText='WARNING'
