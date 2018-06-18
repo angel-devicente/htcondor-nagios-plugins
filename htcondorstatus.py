@@ -59,7 +59,7 @@ for slot in slots:
 	slotState=3
 	slotStateText='UNKNOWN'
 	# these are just guesses
-	if slot['Activity'] in ['Busy','Idle','Benchmarking']:
+	if slot['Activity'] in ['Claimed','Idle','Benchmarking']:
 		slotState=0
 		slotStateText='OK'
 	if slot['Activity'] in ['None','Retiring','Vacating','Suspended']:
