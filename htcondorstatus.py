@@ -74,6 +74,7 @@ for slot in slots:
 	if slot['CLIENTGROUP'] not in slotCounts:
 		slotCounts[slot['CLIENTGROUP']] = {}
 		slotCounts[slot['CLIENTGROUP']]['Total'] = 0
+		slotCounts[slot['CLIENTGROUP']]['Idle'] = 0
 	slotCounts[slot['CLIENTGROUP']]['Total'] += 1
 	if slot['Activity'] not in slotCounts[slot['CLIENTGROUP']]:
 		slotCounts[slot['CLIENTGROUP']][slot['Activity']] = 0
@@ -109,7 +110,7 @@ for clientgroup in conf.sections():
 			clientgroupStateText='CRITICAL'
 
 #		print str(clientgroupState) + ' Condor_clientgroup_' + clientgroup + ' - ' + clientgroupStateText + ' - clientgroup ' + clientgroup + ' has ' + str(slotCounts[clientgroup]['Total']) + ' total workers and ' + str(slotCounts[clientgroup]['Idle']) + ' idle workers'
-#		print "%d Condor_clientgroup_%s %s=%d;%d;%d;0 %s - clientgroup %s has %d total workers and %d idle workers" % (clientgroupState,clientgroup,clientgroup,slotCounts[clientgroup]['Idle'],conf.getint(clientgroup,'minIdle.warn'),conf.getint(clientgroup,'minIdle.crit'),clientgroupStateText,clientgroup,slotCounts[clientgroup]['Total'],slotCounts[clientgroup]['Idle'])
+		print "%d Condor_clientgroup_%s %s=%d;%d;%d;0 %s - clientgroup %s has %d total workers and %d idle workers" % (clientgroupState,clientgroup,clientgroup,slotCounts[clientgroup]['Idle'],conf.getint(clientgroup,'minIdle.warn'),conf.getint(clientgroup,'minIdle.crit'),clientgroupStateText,clientgroup,slotCounts[clientgroup]['Total'],slotCounts[clientgroup]['Idle'])
 
 	except:
 		print str(3) + ' Condor_clientgroup_' + clientgroup + ' - UNKNOWN - clientgroup ' + clientgroup + ' has no workers in any state'
