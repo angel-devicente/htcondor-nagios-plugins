@@ -89,7 +89,6 @@ for clientgroup in conf.sections():
 		clientgroupState=3
 		clientgroupStateText='UNKNOWN'
 
-		print slotCounts[clientgroup]
 		if slotCounts[clientgroup]['Total'] >= conf.getint(clientgroup,'minTotal.warn'):
 			clientgroupState=0
 			clientgroupStateText='OK'
@@ -110,7 +109,7 @@ for clientgroup in conf.sections():
 			clientgroupStateText='CRITICAL'
 
 #		print str(clientgroupState) + ' Condor_clientgroup_' + clientgroup + ' - ' + clientgroupStateText + ' - clientgroup ' + clientgroup + ' has ' + str(slotCounts[clientgroup]['Total']) + ' total workers and ' + str(slotCounts[clientgroup]['Idle']) + ' idle workers'
-		print "%d Condor_clientgroup_%s %s=%d;%d;%d;0 %s - clientgroup %s has %d total workers and %d idle workers" % (clientgroupState,clientgroup,clientgroup,slotCounts[clientgroup]['Idle'],conf.getint(clientgroup,'minIdle.warn'),conf.getint(clientgroup,'minIdle.crit'),clientgroupStateText,clientgroup,slotCounts[clientgroup]['Total'],slotCounts[clientgroup]['Idle'])
+#		print "%d Condor_clientgroup_%s %s=%d;%d;%d;0 %s - clientgroup %s has %d total workers and %d idle workers" % (clientgroupState,clientgroup,clientgroup,slotCounts[clientgroup]['Idle'],conf.getint(clientgroup,'minIdle.warn'),conf.getint(clientgroup,'minIdle.crit'),clientgroupStateText,clientgroup,slotCounts[clientgroup]['Total'],slotCounts[clientgroup]['Idle'])
 
 	except:
 		print str(3) + ' Condor_clientgroup_' + clientgroup + ' - UNKNOWN - clientgroup ' + clientgroup + ' has no workers in any state'
