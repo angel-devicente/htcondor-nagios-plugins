@@ -79,8 +79,6 @@ for slot in slots:
 	if slot['Activity'] not in slotCounts[slot['CLIENTGROUP']]:
 		slotCounts[slot['CLIENTGROUP']][slot['Activity']] = 0
 	slotCounts[slot['CLIENTGROUP']][slot['Activity']] += 1
-
-print slotCounts
 	
 # this doesn't pick up clientgroups in condor but not in config file
 for clientgroup in conf.sections():
