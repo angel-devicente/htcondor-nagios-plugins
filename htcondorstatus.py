@@ -59,7 +59,7 @@ for slot in slots:
 	slotState=3
 	slotStateText='UNKNOWN'
 	# these are just guesses
-	if slot['Activity'] in ['Claimed','Idle','Benchmarking']:
+	if slot['Activity'] in ['Busy','Idle','Benchmarking']:
 		slotState=0
 		slotStateText='OK'
 	if slot['Activity'] in ['None','Retiring','Vacating','Suspended']:
@@ -79,6 +79,8 @@ for slot in slots:
 		slotCounts[slot['CLIENTGROUP']][slot['Activity']] = 0
 	slotCounts[slot['CLIENTGROUP']][slot['Activity']] += 1
 
+print slotCounts
+	
 # this doesn't pick up clientgroups in condor but not in config file
 for clientgroup in conf.sections():
 	if clientgroup in ['DEFAULT','global']:
