@@ -2,6 +2,8 @@
 
 #
 # Be sure to populate the *host's* /etc/condor/ directory appropriately!
+# It needs condor_config, condor_config.local, and password from the
+# manager container's /etc/condor/ directory.
 #
 
 import sys
