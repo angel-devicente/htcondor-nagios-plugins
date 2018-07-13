@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+#
+# Be sure to populate the *host's* /etc/condor/ directory appropriately!
+#
+
 import sys
 import configparser
 import htcondor
