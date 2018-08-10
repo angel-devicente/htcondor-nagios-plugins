@@ -179,7 +179,7 @@ for job in jobs:
 	if jobRunningTime > conf.getint('global','runtime.warn'):
 		runningTimeState=1
 		runningTimeStateText='WARNING'
-		longRunningJobList.append( "%s(%s,%d)"%(jobname,acctgroup,jobRunningTime))
+		longRunningJobList.append( "%s(%s, %s, %d min)"%(job['GlobalJobId'],jobname,acctgroup,jobRunningTime))
 	if jobRunningTime > conf.getint('global','runtime.crit'):
 		runningTimeState=2
 		runningTimeStateText='CRITICAL'
