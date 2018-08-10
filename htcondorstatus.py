@@ -179,7 +179,7 @@ for job in jobs:
 	if jobRunningTime > conf.getint('global','runtime.warn'):
 		runningTimeState=1
 		runningTimeStateText='WARNING'
-		longRunningJobList.append( "%s(%s, %s, %d min)"%(job['GlobalJobId'],jobname,acctgroup,jobRunningTime))
+		longRunningJobList.append( "%d (%s, %s, %d min)"%(job['ClusterId'],acctgroup,jobname,jobRunningTime))
 	if jobRunningTime > conf.getint('global','runtime.crit'):
 		runningTimeState=2
 		runningTimeStateText='CRITICAL'
@@ -192,7 +192,7 @@ for job in jobs:
 	if jobIdleTime > conf.getint('global','idletime.warn'):
 		idleTimeState=1
 		idleTimeStateText='WARNING'
-		longIdleJobList.append( "%s(%s, %s, %d min)"%(job['GlobalJobId'],jobname,acctgroup,jobIdleTime))
+		longIdleJobList.append( "%d (%s, %s, %dmin)"%(job['ClusterId'],acctgroup,jobname,jobIdleTime))
 	if jobIdleTime > conf.getint('global','idletime.crit'):
 		idleTimeState=2
 		idleTimeStateText='CRITICAL'
