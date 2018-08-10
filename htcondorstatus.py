@@ -192,7 +192,7 @@ for job in jobs:
 	if jobIdleTime > conf.getint('global','idletime.warn'):
 		idleTimeState=1
 		idleTimeStateText='WARNING'
-		longIdleJobList.append( "%s(%s,%d)"%(jobname,acctgroup,jobIdleTime))
+		longIdleJobList.append( "%s(%s, %s, %d min)"%(job['GlobalJobId'],jobname,acctgroup,jobIdleTime))
 	if jobIdleTime > conf.getint('global','idletime.crit'):
 		idleTimeState=2
 		idleTimeStateText='CRITICAL'
