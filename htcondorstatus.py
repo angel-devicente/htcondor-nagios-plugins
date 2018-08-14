@@ -169,7 +169,7 @@ for job in jobs:
 	clientgroup=match.group(1)
     except Exception as e:
 #	print e
-	clientgroup='undefined'
+	clientgroup='unknown'
 
 # these loops could be made better by storing the data in a structure instead of
 # variables with "running" or "idle" in the name
