@@ -123,7 +123,6 @@ for clientgroup in conf.sections():
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
 schedd = htcondor.Schedd(schedddaemon)
-# the docs suggest using xquery() to limit the results here
 # maybe limit to jobs which have not completed?
 jobs = schedd.xquery()
 
@@ -182,7 +181,7 @@ for job in jobs:
 	if jobRunningTime > conf.getint('global','runtime.warn'):
 		runningTimeState=1
 		runningTimeStateText='WARNING'
-		longRunningJobList.append( "%d (%s, %s, %d min)"%(job['ClusterId'],acctgroup,jobname,jobRunningTime))
+		longRunningJobList.append( "%d (%s, %s, %s, %d min)"%(job['ClusterId'],acctgroup,jobname,job['RemoteHost'],jobRunningTime))
 	if jobRunningTime > conf.getint('global','runtime.crit'):
 		runningTimeState=2
 		runningTimeStateText='CRITICAL'
