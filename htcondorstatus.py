@@ -167,7 +167,7 @@ for job in jobs:
     try:
         match=clientgroupre.match(str(job['Requirements']))
 	print match
-	clientgroup=m.group(1)
+	clientgroup=match.group(1)
     except Exception as e:
 	print e
 	clientgroup='undefined'
