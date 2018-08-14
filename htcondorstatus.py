@@ -165,11 +165,10 @@ for job in jobs:
     except:
 	acctgroup='undefined'
     try:
-        match=clientgroupre.match(str(job['Requirements']))
-	print match
+	match=clientgroupre.match(str(job['Requirements']))
 	clientgroup=match.group(1)
     except Exception as e:
-	print e
+#	print e
 	clientgroup='undefined'
 
 # these loops could be made better by storing the data in a structure instead of
