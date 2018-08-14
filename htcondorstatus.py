@@ -198,7 +198,7 @@ for job in jobs:
 	if jobIdleTime > conf.getint('global','idletime.warn'):
 		idleTimeState=1
 		idleTimeStateText='WARNING'
-		longIdleJobList.append( "%d (%s, %s, %dmin)"%(job['ClusterId'],acctgroup,clientgroup,jobname,jobIdleTime))
+		longIdleJobList.append( "%d (%s, %s, %s, %dmin)"%(job['ClusterId'],acctgroup,clientgroup,jobname,jobIdleTime))
 	if jobIdleTime > conf.getint('global','idletime.crit'):
 		idleTimeState=2
 		idleTimeStateText='CRITICAL'
