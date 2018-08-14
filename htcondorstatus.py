@@ -165,6 +165,7 @@ for job in jobs:
     except:
 	acctgroup='undefined'
     try:
+	print job['Requirements']
         match=clientgroupre.match(job['Requirements'])
 	clientgroup=m.group(1)
     except:
