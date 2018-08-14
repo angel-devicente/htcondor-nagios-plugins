@@ -9,6 +9,7 @@
 import sys
 import configparser
 import htcondor
+import classad
 
 # magic numbers:
 # https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=MagicNumbers
