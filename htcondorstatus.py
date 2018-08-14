@@ -123,7 +123,9 @@ for clientgroup in conf.sections():
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
 schedd = htcondor.Schedd(schedddaemon)
-jobs = schedd.query()
+# the docs suggest using xquery() to limit the results here
+# maybe limit to jobs which have not completed?
+jobs = schedd.xquery()
 
 # need to make these clientgroup-specific?
 runningJobCount=0
