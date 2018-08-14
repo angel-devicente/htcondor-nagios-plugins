@@ -8,6 +8,7 @@
 
 import sys
 import configparser
+import re
 import htcondor
 import classad
 
@@ -122,6 +123,8 @@ for clientgroup in conf.sections():
 
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
+clientgroupre=re.compile('.*CLIENTGROUP == .(\w+)')
+
 schedd = htcondor.Schedd(schedddaemon)
 # maybe limit to jobs which have not completed?
 jobs = schedd.xquery()
@@ -162,7 +165,8 @@ for job in jobs:
     except:
 	acctgroup='undefined'
     try:
-	clientgroup=job['CLIENTGROUP']
+        match=clientgroupre.match(job['Requirements'])
+	clientgroup=m.group(1)
     except:
 	clientgroup='undefined'
 
@@ -194,7 +198,7 @@ for job in jobs:
 	if jobIdleTime > conf.getint('global','idletime.warn'):
 		idleTimeState=1
 		idleTimeStateText='WARNING'
-		longIdleJobList.append( "%d (%s, %s, %dmin)"%(job['ClusterId'],acctgroup,jobname,jobIdleTime))
+		longIdleJobList.append( "%d (%s, %s, %dmin)"%(job['ClusterId'],acctgroup,clientgroup,jobname,jobIdleTime))
 	if jobIdleTime > conf.getint('global','idletime.crit'):
 		idleTimeState=2
 		idleTimeStateText='CRITICAL'
