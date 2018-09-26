@@ -174,7 +174,7 @@ for job in jobs:
 	clientgroup='unknown'
     try:
 	tokenmatch=tokenre.match(str(job['Environment']))
-	token=match.group(1)
+	token=tokenmatch.group(1)
     except:
 	token='unknown'
 
