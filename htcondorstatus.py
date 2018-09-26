@@ -202,7 +202,7 @@ for job in jobs:
 # if Unauthorized, then alert; print job id, slot, acctgroup
 	headers = {'authorization': token}
 	r = requests.get(authUrl, headers=headers)
-	if r.status!=200:
+	if r.status_code != 200:
 		print r
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
