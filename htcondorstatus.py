@@ -124,6 +124,7 @@ for clientgroup in conf.sections():
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
 clientgroupre=re.compile('.*CLIENTGROUP == .(\w+)')
+tokenre=re.compile('.*KB_AUTH_TOKEN=.(\w+)')
 
 schedd = htcondor.Schedd(schedddaemon)
 # maybe limit to jobs which have not completed?
@@ -156,6 +157,7 @@ for job in jobs:
     jobname='[undefined]'
     acctgroup='[undefined]'
     clientgroup='[undefined]'
+    token='[undefined]'
     try:
 	jobname=job['JobBatchName']
     except:
@@ -170,6 +172,11 @@ for job in jobs:
     except Exception as e:
 #	print e
 	clientgroup='unknown'
+    try:
+	tokenmatch=tokenre.match(str(job['Environment']))
+	token=match.group(1)
+    except:
+	token='unknown'
 
 # these loops could be made better by storing the data in a structure instead of
 # variables with "running" or "idle" in the name
@@ -179,7 +186,9 @@ for job in jobs:
     if job['JobStatus'] == 2:
 #	print job
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
-	print job['Environment']
+#	print job['Environment']
+	print token
+
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
 		maxRunningTime=jobRunningTime
