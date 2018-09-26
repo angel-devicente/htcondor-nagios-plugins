@@ -13,9 +13,9 @@ import htcondor
 import classad
 import requests
 
-#import urllib3
-#urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-requests.packages.urllib3.disable_warnings()
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+#requests.packages.urllib3.disable_warnings()
 
 # magic numbers:
 # https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=MagicNumbers
