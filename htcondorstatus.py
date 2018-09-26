@@ -193,7 +193,7 @@ for job in jobs:
     if job['JobStatus'] == 2:
 #	print job
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
-#	print job['Environment']
+	print job['Environment']
 	print token
 
 # to do: 
