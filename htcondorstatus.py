@@ -15,6 +15,7 @@ import requests
 
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecurePlatformWarning)
+urllib3.disable_warnings(urllib3.exceptions.SNIMissingWarning)
 #requests.packages.urllib3.disable_warnings()
 
 # magic numbers:
