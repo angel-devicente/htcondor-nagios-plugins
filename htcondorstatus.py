@@ -20,6 +20,7 @@ configfile=sys.argv[1]
 conf=configparser.ConfigParser()
 conf.read(configfile)
 #print conf.sections()
+authUrl='https://kbase.us/services/auth/me'
 
 #collector = htcondor.Collector('host:9618')
 collector = htcondor.Collector()
@@ -194,6 +195,8 @@ for job in jobs:
 # bail if token==unknown
 # curl -s -H "Authorization: token" https://kbase.us/services/auth/me
 # if Unauthorized, then alert; print job id, slot, acctgroup
+	headers = {'user-agent': 'my-app/0.0.1'}
+	r = requests.get(authUrl, headers=headers)
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
