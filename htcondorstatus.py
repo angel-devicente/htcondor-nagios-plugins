@@ -202,8 +202,9 @@ for job in jobs:
 # if Unauthorized, then alert; print job id, slot, acctgroup
 	headers = {'authorization': token}
 	r = requests.get(authUrl, headers=headers)
-	if r.status_code != 200:
-		print str(job['ClusterId']) + ' ' + job['RemoteHost'] + ' ' + acctgroup
+# in this block, add jobs to a list?  then alert later if list length > 0?
+#	if r.status_code != 200:
+#		print str(job['ClusterId']) + ' ' + job['RemoteHost'] + ' ' + acctgroup
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
