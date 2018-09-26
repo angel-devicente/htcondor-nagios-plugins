@@ -193,8 +193,8 @@ for job in jobs:
     if job['JobStatus'] == 2:
 #	print job
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
-	print job['Environment']
-	print token
+#	print job['Environment']
+#	print token
 
 # to do: 
 # bail if token==unknown
@@ -202,7 +202,8 @@ for job in jobs:
 # if Unauthorized, then alert; print job id, slot, acctgroup
 	headers = {'authorization': token}
 	r = requests.get(authUrl, headers=headers)
-	print r
+	if r.status!=200:
+		print r
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
