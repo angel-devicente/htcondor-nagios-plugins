@@ -131,7 +131,7 @@ for clientgroup in conf.sections():
 schedddaemon = collector.locateAll(htcondor.DaemonTypes.Schedd)[0]
 
 clientgroupre=re.compile('.*CLIENTGROUP == .(\w+)')
-tokenre=re.compile('.*KB_AUTH_TOKEN=.(\w+)')
+tokenre=re.compile('.*KB_AUTH_TOKEN=(\w+)')
 
 schedd = htcondor.Schedd(schedddaemon)
 # maybe limit to jobs which have not completed?
