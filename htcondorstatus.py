@@ -266,7 +266,7 @@ print "%d Condor_runningCount runningCount=%d;%d;%d;0 %s - runningCount %d jobs 
 print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max %d minutes, longest 10 jobIds (minutes): %s" % (idleTimeState,maxIdleTime,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText,maxIdleTime,longIdleJobsText)
 print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max %d minutes, longest 10 jobIds (minutes): %s" % (runningTimeState,maxRunningTime,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText,maxRunningTime,longRunningJobsText)
 
-print "%d Condor_expiredTokens - %s - %d jobs with expired tokens: %s" % (expiredTokenState,expiredTokenStateText,len(expiredTokenJobsList),longRunningJobsText)
+print "%d Condor_expiredTokens - %s - %d jobs with expired tokens: %s" % (expiredTokenState,expiredTokenStateText,len(expiredTokenJobsList),expiredTokenJobsText)
 
 
 
