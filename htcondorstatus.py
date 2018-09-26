@@ -258,7 +258,7 @@ if idleJobCount > conf.getint('global','idlecount.crit'):
 
 if len(expiredTokenJobsList) > 0:
 	expiredTokenState=1
-	expiredTokenStateTest='WARNING'
+	expiredTokenStateText='WARNING'
 	
 print "%d Condor_idleCount idleCount=%d;%d;%d;0 %s - idleCount %d jobs idle" % (idleCountState,idleJobCount,conf.getint('global','idlecount.warn'),conf.getint('global','idlecount.crit'),idleCountStateText,idleJobCount)
 print "%d Condor_runningCount runningCount=%d;%d;%d;0 %s - runningCount %d jobs running" % (runningCountState,runningJobCount,conf.getint('global','runcount.warn'),conf.getint('global','runcount.crit'),runningCountStateText,runningJobCount)
