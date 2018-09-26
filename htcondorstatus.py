@@ -155,6 +155,10 @@ idleCountStateText='OK'
 runningCountState=0
 runningCountStateText='OK'
 
+expiredTokenState=0
+expiredTokenStateText='OK'
+expiredTokenJobsList=[]
+
 # in this loop:
 # jobs queued/queued time (is this idle?) (still to do)
 # jobs in progress/in progress time (still to do)
@@ -203,8 +207,8 @@ for job in jobs:
 	headers = {'authorization': token}
 	r = requests.get(authUrl, headers=headers)
 # in this block, add jobs to a list?  then alert later if list length > 0?
-#	if r.status_code != 200:
-#		print str(job['ClusterId']) + ' ' + job['RemoteHost'] + ' ' + acctgroup
+	if r.status_code != 200:
+		expiredTokenJobsList.append(str(job['ClusterId']) + ' ' + job['RemoteHost'] + ' ' + acctgroup)
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
@@ -237,6 +241,7 @@ for job in jobs:
 # probably should sort the list by time then take longest
 longRunningJobsText = ', '.join(longRunningJobList[-10:-1])
 longIdleJobsText = ', '.join(longIdleJobList[-10:-1])
+expiredTokenJobsText = ', '.join(expiredTokenJobsList[-10:-1])
 
 if runningJobCount > conf.getint('global','runcount.warn'):
 	runningCountState=1
@@ -251,11 +256,19 @@ if idleJobCount > conf.getint('global','idlecount.crit'):
 	idleCountState=2
 	idleCountStateText='CRITICAL'
 
+if len(expiredTokenJobsList) > 0:
+	expiredTokenState=1
+	expiredTokenStateTest='WARNING'
+	
 print "%d Condor_idleCount idleCount=%d;%d;%d;0 %s - idleCount %d jobs idle" % (idleCountState,idleJobCount,conf.getint('global','idlecount.warn'),conf.getint('global','idlecount.crit'),idleCountStateText,idleJobCount)
 print "%d Condor_runningCount runningCount=%d;%d;%d;0 %s - runningCount %d jobs running" % (runningCountState,runningJobCount,conf.getint('global','runcount.warn'),conf.getint('global','runcount.crit'),runningCountStateText,runningJobCount)
 
 print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max %d minutes, longest 10 jobIds (minutes): %s" % (idleTimeState,maxIdleTime,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText,maxIdleTime,longIdleJobsText)
 print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max %d minutes, longest 10 jobIds (minutes): %s" % (runningTimeState,maxRunningTime,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText,maxRunningTime,longRunningJobsText)
+
+print "%d Condor_expiredTokens - %s -  %s" % (expiredTokenState,expiredTokenStateText,longRunningJobsText)
+
+
 
 #    print jobname
 #    print job['JobStartDate']
