@@ -11,6 +11,7 @@ import configparser
 import re
 import htcondor
 import classad
+import requests
 
 # magic numbers:
 # https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki?p=MagicNumbers
@@ -20,7 +21,7 @@ conf=configparser.ConfigParser()
 conf.read(configfile)
 #print conf.sections()
 
-#collector = htcondor.Collector('ci.kbase.us:9618')
+#collector = htcondor.Collector('host:9618')
 collector = htcondor.Collector()
 
 collectors = collector.query(htcondor.AdTypes.Collector, "true", ["Name"])
@@ -187,7 +188,12 @@ for job in jobs:
 #	print job
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
 #	print job['Environment']
-	print token
+#	print token
+
+# to do: 
+# bail if token==unknown
+# curl -s -H "Authorization: token" https://kbase.us/services/auth/me
+# if Unauthorized, then alert; print job id, slot, acctgroup
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
