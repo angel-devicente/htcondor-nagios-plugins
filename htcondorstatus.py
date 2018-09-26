@@ -194,7 +194,7 @@ for job in jobs:
 #	print job
 #	print jobname + ' : ' + acctgroup + ' ' + str(job['JobStatus']) + ' ' + str(job['JobStartDate']) + ' ' + str(job['ServerTime'])
 #	print job['Environment']
-#	print token
+	print token
 
 # to do: 
 # bail if token==unknown
