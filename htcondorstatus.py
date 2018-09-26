@@ -200,7 +200,7 @@ for job in jobs:
 # bail if token==unknown
 # curl -s -H "Authorization: token" https://kbase.us/services/auth/me
 # if Unauthorized, then alert; print job id, slot, acctgroup
-	headers = {'user-agent': 'my-app/0.0.1'}
+	headers = {'Authorization': token}
 	r = requests.get(authUrl, headers=headers)
 	print r
 
