@@ -202,6 +202,7 @@ for job in jobs:
 # if Unauthorized, then alert; print job id, slot, acctgroup
 	headers = {'user-agent': 'my-app/0.0.1'}
 	r = requests.get(authUrl, headers=headers)
+	print r
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
