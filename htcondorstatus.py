@@ -187,7 +187,7 @@ for job in jobs:
                if runningTimeState != 2:
                        runningTimeState=1
                        runningTimeStateText='WARNING'
-		longRunningJobList.append( "%d (%s, %s, %s, %d min)"%(job['ClusterId'],acctgroup,jobname,job['RemoteHost'],jobRunningTime))
+	longRunningJobList.append( "%d (%s, %s, %s, %d min)"%(job['ClusterId'],acctgroup,jobname,job['RemoteHost'],jobRunningTime))
 	if jobRunningTime > conf.getint('global','runtime.crit'):
 		runningTimeState=2
 		runningTimeStateText='CRITICAL'
@@ -201,7 +201,7 @@ for job in jobs:
                if idleTimeState != 2:
                        idleTimeState=1
                        idleTimeStateText='WARNING'
-		longIdleJobList.append( "%d (%s, %s, %s, %dmin)"%(job['ClusterId'],acctgroup,clientgroup,jobname,jobIdleTime))
+	longIdleJobList.append( "%d (%s, %s, %s, %dmin)"%(job['ClusterId'],acctgroup,clientgroup,jobname,jobIdleTime))
 	if jobIdleTime > conf.getint('global','idletime.crit'):
 		idleTimeState=2
 		idleTimeStateText='CRITICAL'
