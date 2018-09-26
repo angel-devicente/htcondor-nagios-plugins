@@ -184,8 +184,9 @@ for job in jobs:
 	if jobRunningTime > maxRunningTime:
 		maxRunningTime=jobRunningTime
 	if jobRunningTime > conf.getint('global','runtime.warn'):
-		runningTimeState=1
-		runningTimeStateText='WARNING'
+               if runningTimeState != 2:
+                       runningTimeState=1
+                       runningTimeStateText='WARNING'
 		longRunningJobList.append( "%d (%s, %s, %s, %d min)"%(job['ClusterId'],acctgroup,jobname,job['RemoteHost'],jobRunningTime))
 	if jobRunningTime > conf.getint('global','runtime.crit'):
 		runningTimeState=2
@@ -197,16 +198,19 @@ for job in jobs:
 	if jobIdleTime > maxIdleTime:
 		maxIdleTime=jobIdleTime
 	if jobIdleTime > conf.getint('global','idletime.warn'):
-		idleTimeState=1
-		idleTimeStateText='WARNING'
+               if idleTimeState != 2:
+                       idleTimeState=1
+                       idleTimeStateText='WARNING'
 		longIdleJobList.append( "%d (%s, %s, %s, %dmin)"%(job['ClusterId'],acctgroup,clientgroup,jobname,jobIdleTime))
 	if jobIdleTime > conf.getint('global','idletime.crit'):
 		idleTimeState=2
 		idleTimeStateText='CRITICAL'
 	idleJobCount += 1
 
-longRunningJobsText = ', '.join(longRunningJobList[-10:])
-longIdleJobsText = ', '.join(longIdleJobList[-10:])
+# these do not properly capture the longest jobs
+# probably should sort the list by time then take longest
+longRunningJobsText = ', '.join(longRunningJobList[-10:-1])
+longIdleJobsText = ', '.join(longIdleJobList[-10:-1])
 
 if runningJobCount > conf.getint('global','runcount.warn'):
 	runningCountState=1
