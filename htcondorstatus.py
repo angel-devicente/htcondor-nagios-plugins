@@ -203,7 +203,7 @@ for job in jobs:
 	headers = {'authorization': token}
 	r = requests.get(authUrl, headers=headers)
 	if r.status_code != 200:
-		print job['ClusterId'] + ' ' + job['RemoteHost'] + ' ' + acctgroup
+		print str(job['ClusterId']) + ' ' + job['RemoteHost'] + ' ' + acctgroup
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
