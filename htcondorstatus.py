@@ -208,7 +208,7 @@ for job in jobs:
 	r = requests.get(authUrl, headers=headers)
 # in this block, add jobs to a list?  then alert later if list length > 0?
 	if r.status_code != 200:
-		expiredTokenJobsList.append(str(job['ClusterId']) + ' ' + job['RemoteHost'] + ' ' + acctgroup)
+		expiredTokenJobsList.append(str(job['ClusterId']) + ' (running) ' + job['RemoteHost'] + ' ' + acctgroup)
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
@@ -224,6 +224,13 @@ for job in jobs:
 	runningJobCount += 1
 # 1 is idle; alert on long queue times
     if job['JobStatus'] == 1:
+
+# report idle jobs with expired tokens
+	headers = {'authorization': token}
+	r = requests.get(authUrl, headers=headers)
+	if r.status_code != 200:
+		expiredTokenJobsList.append(str(job['ClusterId']) + ' (idle) ' + job['RemoteHost'] + ' ' + acctgroup)
+
 	jobIdleTime = (job['ServerTime'] - job['QDate'])/60
 	if jobIdleTime > maxIdleTime:
 		maxIdleTime=jobIdleTime
