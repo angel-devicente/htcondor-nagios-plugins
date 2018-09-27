@@ -229,7 +229,7 @@ for job in jobs:
 	headers = {'authorization': token}
 	r = requests.get(authUrl, headers=headers)
 	if r.status_code != 200:
-		expiredTokenJobsList.append(str(job['ClusterId']) + ' (idle) ' + job['RemoteHost'] + ' ' + acctgroup)
+		expiredTokenJobsList.append(str(job['ClusterId']) + ' (idle) ' + acctgroup)
 
 	jobIdleTime = (job['ServerTime'] - job['QDate'])/60
 	if jobIdleTime > maxIdleTime:
