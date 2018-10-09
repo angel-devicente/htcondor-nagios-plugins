@@ -214,10 +214,10 @@ for job in jobs:
 	if jobRunningTime > maxRunningTime:
 		maxRunningTime=jobRunningTime
 	if jobRunningTime > conf.getint('global','runtime.warn'):
-               if runningTimeState != 2:
+                if runningTimeState != 2:
                        runningTimeState=1
                        runningTimeStateText='WARNING'
-	longRunningJobList.append( "%d (%s, %s, %s, %d min)"%(job['ClusterId'],acctgroup,jobname,job['RemoteHost'],jobRunningTime))
+	        longRunningJobList.append( "%d (%s, %s, %s, %d min)"%(job['ClusterId'],acctgroup,jobname,job['RemoteHost'],jobRunningTime))
 	if jobRunningTime > conf.getint('global','runtime.crit'):
 		runningTimeState=2
 		runningTimeStateText='CRITICAL'
