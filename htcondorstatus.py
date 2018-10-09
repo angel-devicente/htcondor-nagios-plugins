@@ -246,7 +246,7 @@ for job in jobs:
 
 # these do not properly capture the longest jobs
 # probably should sort the list by time then take longest
-longRunningJobsText = ', '.join(longRunningJobList)
+longRunningJobsText = ', '.join(longRunningJobList[0:10])
 longIdleJobsText = ', '.join(longIdleJobList[-10:-1])
 expiredTokenJobsText = ', '.join(expiredTokenJobsList)
 
@@ -270,8 +270,8 @@ if len(expiredTokenJobsList) > 0:
 print "%d Condor_idleCount idleCount=%d;%d;%d;0 %s - idleCount %d jobs idle" % (idleCountState,idleJobCount,conf.getint('global','idlecount.warn'),conf.getint('global','idlecount.crit'),idleCountStateText,idleJobCount)
 print "%d Condor_runningCount runningCount=%d;%d;%d;0 %s - runningCount %d jobs running" % (runningCountState,runningJobCount,conf.getint('global','runcount.warn'),conf.getint('global','runcount.crit'),runningCountStateText,runningJobCount)
 
-print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max %d minutes, longest 10 jobIds (minutes): %s" % (idleTimeState,maxIdleTime,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText,maxIdleTime,longIdleJobsText)
-print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max %d minutes, longest 10 jobIds (minutes): %s" % (runningTimeState,maxRunningTime,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText,maxRunningTime,longRunningJobsText)
+print "%d Condor_idleTime idleTime=%d;%d;%d;0 %s - idleTime max %d minutes, sample 10 jobIds (minutes): %s" % (idleTimeState,maxIdleTime,conf.getint('global','idletime.warn'),conf.getint('global','idletime.crit'),idleTimeStateText,maxIdleTime,longIdleJobsText)
+print "%d Condor_runningTime runningTime=%d;%d;%d;0 %s - runningTime max %d minutes, sample 10 jobIds (minutes): %s" % (runningTimeState,maxRunningTime,conf.getint('global','runtime.warn'),conf.getint('global','runtime.crit'),runningTimeStateText,maxRunningTime,longRunningJobsText)
 
 print "%d Condor_expiredTokens - %s - %d jobs with expired tokens: %s" % (expiredTokenState,expiredTokenStateText,len(expiredTokenJobsList),expiredTokenJobsText)
 
