@@ -246,8 +246,7 @@ for job in jobs:
 
 # these do not properly capture the longest jobs
 # probably should sort the list by time then take longest
-print longRunningJobList
-longRunningJobsText = ', '.join(longRunningJobList[-10:-1])
+longRunningJobsText = ', '.join(longRunningJobList)
 longIdleJobsText = ', '.join(longIdleJobList[-10:-1])
 expiredTokenJobsText = ', '.join(expiredTokenJobsList)
 
