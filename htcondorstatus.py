@@ -208,7 +208,7 @@ for job in jobs:
 	r = requests.get(authUrl, headers=headers)
 # in this block, add jobs to a list?  then alert later if list length > 0?
 	if r.status_code != 200:
-		expiredTokenJobsList.append(str(job['ClusterId']) + ' (running) ' + job['RemoteHost'] + ' ' + acctgroup)
+		expiredTokenJobsList.append(str(job['ClusterId']) + ' (running) ' + job['RemoteHost'] + ' ' + jobname + ' ' +acctgroup)
 
 	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
 	if jobRunningTime > maxRunningTime:
