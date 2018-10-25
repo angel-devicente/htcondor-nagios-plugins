@@ -247,7 +247,7 @@ for job in jobs:
 # these do not properly capture the longest jobs
 # probably should sort the list by time then take longest
 longRunningJobsText = ', '.join(longRunningJobList[0:10])
-longIdleJobsText = ', '.join(longIdleJobList[-10:-1])
+longIdleJobsText = ', '.join(longIdleJobList[0:10])
 expiredTokenJobsText = ', '.join(expiredTokenJobsList)
 
 if runningJobCount > conf.getint('global','runcount.warn'):
