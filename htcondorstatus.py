@@ -210,7 +210,7 @@ for job in jobs:
 	if r.status_code != 200:
 		expiredTokenJobsList.append(str(job['ClusterId']) + ' (running) ' + job['RemoteHost'] + ' ' + jobname + ' ' +acctgroup)
 
-	jobRunningTime = (job['ServerTime'] - job['JobStartDate'])/60
+	jobRunningTime = (job['ServerTime'] - job['JobCurrentStartDate'])/60
 	if jobRunningTime > maxRunningTime:
 		maxRunningTime=jobRunningTime
 	if jobRunningTime > conf.getint('global','runtime.warn'):
