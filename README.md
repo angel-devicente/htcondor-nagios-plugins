@@ -1,3 +1,5 @@
+This fork is deprecated.
+
 ral-htcondor-nagios-plugins
 ===========================
 
