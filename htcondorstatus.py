@@ -225,11 +225,7 @@ for job in jobs:
 # 1 is idle; alert on long queue times
     if job['JobStatus'] == 1:
 
-# report idle jobs with expired tokens
-	headers = {'authorization': token}
-	r = requests.get(authUrl, headers=headers)
-	if r.status_code != 200:
-		expiredTokenJobsList.append(str(job['ClusterId']) + ' (idle) ' + acctgroup)
+	idleJobCount += 1
 
 	jobIdleTime = (job['ServerTime'] - job['QDate'])/60
 	if jobIdleTime > maxIdleTime:
@@ -242,7 +238,14 @@ for job in jobs:
 	if jobIdleTime > conf.getint('global','idletime.crit'):
 		idleTimeState=2
 		idleTimeStateText='CRITICAL'
-	idleJobCount += 1
+
+# report idle jobs with expired tokens
+# moving to here to make it easier to bypass if needed
+	headers = {'authorization': token}
+	r = requests.get(authUrl, headers=headers)
+	if r.status_code != 200:
+		expiredTokenJobsList.append(str(job['ClusterId']) + ' (idle) ' + acctgroup)
+
 
 # these do not properly capture the longest jobs
 # probably should sort the list by time then take longest
