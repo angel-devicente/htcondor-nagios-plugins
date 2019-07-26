@@ -179,7 +179,8 @@ for job in jobs:
 	jobname=job['GlobalJobId']
     try:
 	# not really sure why some jobs don't have this attribute, but all seem to have AccountingGroup
-	acctgroup=job['AcctGroup'] or job['AccountingGroup']
+#	acctgroup=job['AcctGroup'] or job['AccountingGroup']
+	acctgroup=job['AccountingGroup']
     except:
 	acctgroup='undefined'
     try:
