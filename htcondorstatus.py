@@ -29,7 +29,7 @@ try:
 	authUrl=conf['global']['authUrl']
 except:
 	authUrl='https://kbase.us/services/auth/me'
-print authUrl
+#print authUrl
 
 #collector = htcondor.Collector('host:9618')
 collector = htcondor.Collector()
