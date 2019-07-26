@@ -24,7 +24,7 @@ urllib3.disable_warnings(urllib3.exceptions.SNIMissingWarning)
 configfile=sys.argv[1]
 conf=configparser.ConfigParser()
 conf.read(configfile)
-#print conf.sections()
+print conf.sections()
 authUrl='https://kbase.us/services/auth/me'
 
 #collector = htcondor.Collector('host:9618')
@@ -174,7 +174,9 @@ for job in jobs:
     except:
 	jobname=job['GlobalJobId']
     try:
-	acctgroup=job['AcctGroup']
+	# not really sure why some jobs don't have this attribute, but all seem to have AccountingGroup
+#	acctgroup=job['AcctGroup']
+	acctgroup=job['AccountingGroup']
     except:
 	acctgroup='undefined'
     try:
