@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Copyright 2014 Science and Technology Facilities Council
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,22 +35,22 @@ parser.add_option("-o", dest="online", help="Minimum acceptable percentage of on
 (option, args) = parser.parse_args()
 
 if option.wn:
- minWorkerNodes = option.wn
+ minWorkerNodes = int(option.wn)
 else:
  minWorkerNodes = 80
 
 if option.online:
- minOnLine = option.online
+ minOnLine = int(option.online)
 else:
  minOnLine = 70
 
 try:
   coll = htcondor.Collector(socket.gethostname())
-  startds = coll.query(htcondor.AdTypes.Startd, "PartitionableSlot =?=TRUE", ["StartJobs", "NODE_IS_HEALTHY"])
+  startds = coll.query(htcondor.AdTypes.Startd, "true", ["Name"])
   count = 0
   for startd in startds:
-   if str(startd["StartJobs"]) != "False" and str(startd["NODE_IS_HEALTHY"]) == "True":
-    count += 1
+   if True:          # we should have here some way of checking the healthyness of the node
+       count += 1
   percentOnLine = math.ceil((float(count)/len(startds)*100.0)*100)/100
 
   if len(startds) < minWorkerNodes:
@@ -61,13 +61,13 @@ try:
    rtnMsg += 'WNs online => ' + str(percentOnLine) + '% of advertised [Required => ' + str(minOnLine) + '%]. '
    exitState = CRITICAL
 
-  if exitState is 0:
+  if exitState == 0:
    rtnMsg += 'OK: ' +str(len(startds)) + ' workers are being advertised. ' + str(percentOnLine) + '% of them are online' 
  
-except Exception,e:
+except Exception as e:
     rtnMsg = "UNKNOWN: Problem running check. " + str(e)
     exitState = UNKNOWN
 
-print rtnMsg
-raise SystemExit, exitState
+print(rtnMsg)
+exit(exitState)
 

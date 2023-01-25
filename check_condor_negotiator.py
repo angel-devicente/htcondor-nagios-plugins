@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Copyright 2014 Science and Technology Facilities Council
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,20 +31,21 @@ try:
   numNegotiators = len(negotiators)
 
   if numNegotiators >= 1:
-   if numNegotiators == 1:
-    rtnMsg = "Negotiator running on "
-    exitState = OK 
-   else:
-    rtnMsg="More than 1 negotiator running "
-    exitState = CRITICAL
-   for negotiator in negotiators:
-    rtnMsg += negotiator['Name'].replace(".gridpp.rl.ac.uk","") + " "
+    if numNegotiators == 1:
+      rtnMsg = "Negotiator running on "
+      exitState = OK 
+    else:
+      rtnMsg="More than 1 negotiator running "
+      exitState = CRITICAL
+
+    for negotiator in negotiators:
+      rtnMsg += negotiator['Name'].replace(".ll.iac.es","") + " "
   else:
-   rtnMsg="No negotiators running."
-   exitState = CRITICAL
-except Exception,e:
+    rtnMsg="No negotiators running."
+    exitState = CRITICAL
+except Exception as e:
   rtnMsg = "Problem running check. " + str(e)
   exitState = UNKNOWN
 
-print rtnMsg
-raise SystemExit, exitState 
+print(rtnMsg)
+exit(exitState)

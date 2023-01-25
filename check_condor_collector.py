@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Copyright 2014 Science and Technology Facilities Council
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,20 +31,21 @@ try:
   numCollectors = len(collectors)
 
   if numCollectors >= 1:
-   if numCollectors > 1:
-    rtnMsg = "OK: %s collectors running. " % numCollectors
-    exitState = OK 
-   else:
-    rtnMsg="Warning: Only 1 collector running. "
-    exitState = WARNING
-   for collector in collectors:
-    rtnMsg += collector['Name'].strip('RAL-LCG2@').replace(".gridpp.rl.ac.uk","") + " "
+    if numCollectors == 1:
+      rtnMsg = "Collector running on "
+      exitState = OK 
+    else:
+      rtnMsg="More than 1 collector running "
+      exitState = WARNING
+
+    for collector in collectors:
+      rtnMsg += collector['Name'].strip('"IAC-HTCondor"@').replace(".ll.iac.es","") + " "
   else:
-   rtnMsg="Critical: No collectors running."
-   exitState = CRITICAL
-except Exception,e:
-  rtnMsg = "UNKNOWN: Problem running check. " + str(e)
+    rtnMsg="No collectors running."
+    exitState = CRITICAL
+except Exception as e:
+  rtnMsg = "Problem running check. " + str(e)
   exitState = UNKNOWN
 
-print rtnMsg
-raise SystemExit, exitState 
+print(rtnMsg)
+exit(exitState)

@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-fhostname=`hostname -f`
-shostname=`hostname -s`
+fhostname=$1
+shostname=$2
 
 rtnMsg=""
 rc=0
@@ -34,4 +34,3 @@ fi
 
 echo $rtnMsg
 exit $rc
-
