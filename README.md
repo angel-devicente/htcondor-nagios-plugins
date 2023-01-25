@@ -1,15 +1,10 @@
-This fork is deprecated.
 
-ral-htcondor-nagios-plugins
-===========================
+# Table of Contents
 
-Nagios plugins for HTCondor at the RAL Tier-1. In addition to the tests in this repository, we have process checks for condor_master on all machines running HTCondor.
+1.  [HTCondor Nagios Plugins](#orgb0f0a7d)
 
-<h4>Central managers</h4>
-* check_condor_collector.py
-* check_condor_negotiator.py
-* check_condor_wn.py
 
-<h4>CEs</h4>
-* check_condor_schedd.sh
-* check_job_submission_condor.sh
+<a id="orgb0f0a7d"></a>
+
+# HTCondor Nagios Plugins
+
